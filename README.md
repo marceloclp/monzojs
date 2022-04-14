@@ -15,7 +15,7 @@ npm i @marceloclp/monzojs
 MonzoJS exports all endpoints as unauthed endpoints in case you do not need access to all of the methods:
 
 ```ts
-import { getTransactions } from '@marceloclpmonzojs'
+import { getTransactions } from '@marceloclp/monzojs'
 
 const example = async () => {
   // Note the use of the access token.

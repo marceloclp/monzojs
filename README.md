@@ -7,7 +7,7 @@ MonzoJS **does not** handle authentication, and you must already have your acces
 # Installation
 
 ```bash
-npm i monzojs
+npm i @marceloclp/monzojs
 ```
 
 # Usage

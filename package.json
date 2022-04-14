@@ -1,5 +1,5 @@
 {
-  "name": "monzojs",
+  "name": "@marceloclp/monzojs",
   "version": "1.0.0",
   "description": "Unofficial wrapper for the Monzo API written in TypeScript.",
   "author": "Marcelo Perrella <marceloclperrella@gmail.com>",

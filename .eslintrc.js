@@ -16,9 +16,10 @@ module.exports = {
     'prettier',
   ],
   rules: {
+    'no-unused-vars': 'off',
     'no-console': 'warn',
     '@typescript-eslint/ban-types': 'off',
-    '@typescript-eslint/no-explicity-any': 'off',
+    '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/no-unused-vars': 'off',
     'unused-imports/no-unused-imports': 'error', 
     'unused-imports/no-unused-vars': [

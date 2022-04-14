@@ -13,7 +13,7 @@ type MockedResponse = {
   }
 }
 
-// @ts-expect-error
+// @ts-expect-error required in order to override the fetch method
 global.fetch = jest.fn((url, request) =>
   Promise.resolve({
     json: () => Promise.resolve({ url, request }),
@@ -24,7 +24,7 @@ describe('Fetcher', () => {
   let fetcher: Fetcher
   beforeEach(() => {
     fetcher = new Fetcher('accessToken')
-    // @ts-ignore
+    // @ts-expect-error required in order to clear the mocked promise
     fetch.mockClear()
   })
 
@@ -49,7 +49,7 @@ describe('Fetcher', () => {
         expect(response.request.body).toBeInstanceOf(URLSearchParams)
       })
       it('should have the correct form data', () => {
-        expect((response as any).request.body.get('age')).toBe('10')
+        expect((response.request.body as URLSearchParams).get('age')).toBe('10')
       })
     })
   })

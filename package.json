@@ -20,7 +20,7 @@
   ],
   "scripts": {
     "format": "prettier --write \"src/**/*.ts\"",
-    "lint": "eslint . --ext .ts",
+    "lint": "eslint --config .eslintrc.js . --ext .ts",
     "test": "jest --config jest.config.js",
     "build": "tsc",
     "prepare": "npm run build",

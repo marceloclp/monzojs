@@ -1,3 +1,4 @@
+// eslint-disable-next-line simple-import-sort/imports
 import qs, { StringifiableRecord } from 'query-string'
 import { MONZO_API_BASE_URL } from '../config/constants'
 

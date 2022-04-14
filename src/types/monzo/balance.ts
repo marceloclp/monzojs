@@ -22,5 +22,5 @@ export type Balance = {
   spend_today: number
   local_currency: string
   local_exchange_rate: number
-  local_spend: any[]
+  local_spend: unknown[]
 }

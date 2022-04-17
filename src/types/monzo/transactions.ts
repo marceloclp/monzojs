@@ -92,7 +92,7 @@ export type Transaction = GetUnexpandedObject<ITransaction>
 /**
  * Transactions fields that can be expanded by passing the field name to the
  * expanded parameter in order to save a round-trip.
- * 
+ *
  * @see https://docs.monzo.com/#expanding-objects
  */
 export type ExpandableFields = GetExpandableFields<ITransaction>
@@ -104,13 +104,14 @@ export type ExpandableFields = GetExpandableFields<ITransaction>
  *  type ExpandedTransaction<['merchant']> = Transaction & {
  *    merchant: Merchant | null
  *  }
- * 
+ *
  * @see https://docs.monzo.com/#expanding-objects
  */
-export type ExpandedTransaction<K extends ExpandableFields[] | undefined = undefined> =
-  K extends ExpandableFields[]
-    ? GetExpandedObject<ITransaction, K>
-    : Transaction
+export type ExpandedTransaction<
+  K extends ExpandableFields[] | undefined = undefined
+> = K extends ExpandableFields[]
+  ? GetExpandedObject<ITransaction, K>
+  : Transaction
 
 export type Merchant = {
   id: string

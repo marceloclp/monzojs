@@ -1,6 +1,6 @@
 {
   "name": "@marceloclp/monzojs",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Unofficial wrapper for the Monzo API written in TypeScript.",
   "author": "Marcelo Perrella <marceloclperrella@gmail.com>",
   "main": "lib/index.js",

@@ -36,7 +36,7 @@ export const createWebhook: AuthedEndpoint<
 
 /**
  * Delete a webhook.
- * 
+ *
  * This will stop Monzo from sending notifications to the webhook's url.
  *
  * @see https://docs.monzo.com/#deleting-a-webhook

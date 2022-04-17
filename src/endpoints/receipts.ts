@@ -1,6 +1,6 @@
 import { Monzo, MonzoAPI } from '../types'
 import { AuthedEndpoint } from '../types/endpoints'
-import Fetcher from '../utils/fetcher'
+import createRequest from '../utils/create-request'
 
 /**
  * Retrieve a receipt from its external id.
@@ -11,7 +11,7 @@ export const getReceipt: AuthedEndpoint<
   MonzoAPI.Receipts.GetReceiptParams,
   Monzo.Receipts.Receipt
 > = async (accessToken, { externalId }) =>
-  new Fetcher(accessToken)
+  createRequest(accessToken)
     .withQuery({ external_id: externalId })
     .get<{ receipt: Monzo.Receipts.Receipt }>(`transaction-receipts`)
     .then(({ receipt }) => receipt)
@@ -25,7 +25,7 @@ export const createReceipt: AuthedEndpoint<
   MonzoAPI.Receipts.CreateReceiptParams,
   {}
 > = async (accessToken, { receipt }) =>
-  new Fetcher(accessToken).withJSON(receipt).put<{}>(`transaction-receipts`)
+  createRequest(accessToken).withJSON(receipt).put<{}>(`transaction-receipts`)
 
 /**
  * Update an existing receipt by its external id.
@@ -37,7 +37,7 @@ export const updateReceipt: AuthedEndpoint<
   MonzoAPI.Receipts.UpdateReceiptParams,
   {}
 > = async (accessToken, { receipt }) =>
-  new Fetcher(accessToken).withJSON(receipt).put<{}>(`transaction-receipts`)
+  createRequest(accessToken).withJSON(receipt).put<{}>(`transaction-receipts`)
 
 /**
  * Delete a receipt based on its external id.
@@ -48,6 +48,6 @@ export const deleteReceipt: AuthedEndpoint<
   MonzoAPI.Receipts.DeleteReceiptParams,
   {}
 > = async (accessToken, { externalId }) =>
-  new Fetcher(accessToken)
+  createRequest(accessToken)
     .withJSON({ external_id: externalId })
     .delete<{}>(`transaction-receipts`)

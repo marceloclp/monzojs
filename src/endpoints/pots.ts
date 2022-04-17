@@ -1,6 +1,6 @@
 import { Monzo, MonzoAPI } from '../types'
 import { AuthedEndpoint } from '../types/endpoints'
-import Fetcher from '../utils/fetcher'
+import createRequest from '../utils/create-request'
 
 /**
  * Returns a list of pots owned by the currently authorised user that are
@@ -12,7 +12,7 @@ export const getPots: AuthedEndpoint<
   MonzoAPI.Pots.GetPotsParams,
   Monzo.Pot[]
 > = async (accessToken, { accountId }) =>
-  new Fetcher(accessToken)
+  createRequest(accessToken)
     .withQuery({ current_account_id: accountId })
     .get<{ pots: Monzo.Pot[] }>(`pots`)
     .then(({ pots }) => pots)
@@ -27,7 +27,7 @@ export const depositIntoPot: AuthedEndpoint<
   MonzoAPI.Pots.DepositIntoPotParams,
   Monzo.Pot
 > = async (accessToken, { potId, accountId, amount, dedupeId }) =>
-  new Fetcher(accessToken)
+  createRequest(accessToken)
     .withFormData({
       source_account_id: accountId,
       amount: amount,
@@ -45,7 +45,7 @@ export const withdrawFromPot: AuthedEndpoint<
   MonzoAPI.Pots.WithdrawFromPotParams,
   Monzo.Pot
 > = async (accessToken, { potId, accountId, amount, dedupeId }) =>
-  new Fetcher(accessToken)
+  createRequest(accessToken)
     .withFormData({
       destination_account_id: accountId,
       amount: amount,

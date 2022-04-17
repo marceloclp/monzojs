@@ -1,6 +1,6 @@
 import { Monzo, MonzoAPI } from '../types'
 import { AuthedEndpoint } from '../types/endpoints'
-import Fetcher from '../utils/fetcher'
+import createRequest from '../utils/create-request'
 
 /**
  * List the webhooks your application has registered on an account.
@@ -11,7 +11,7 @@ export const getWebhooks: AuthedEndpoint<
   MonzoAPI.Webhooks.GetWebhookParams,
   Monzo.Webhook[]
 > = async (accessToken, { accountId }) =>
-  new Fetcher(accessToken)
+  createRequest(accessToken)
     .withQuery({ account_id: accountId })
     .get<{ webhooks: Monzo.Webhook[] }>(`webhooks`)
     .then(({ webhooks }) => webhooks)
@@ -29,7 +29,7 @@ export const createWebhook: AuthedEndpoint<
   MonzoAPI.Webhooks.CreateWebhookParams,
   Monzo.Webhook
 > = async (accessToken, { accountId, url }) =>
-  new Fetcher(accessToken)
+  createRequest(accessToken)
     .withFormData({ account_id: accountId, url: url })
     .post<{ webhook: Monzo.Webhook }>(`webhooks`)
     .then(({ webhook }) => webhook)
@@ -45,4 +45,4 @@ export const deleteWebhook: AuthedEndpoint<
   MonzoAPI.Webhooks.DeleteWebhookParams,
   {}
 > = async (accessToken, { webhookId }) =>
-  new Fetcher(accessToken).post<{}>(`webhooks/${webhookId}`)
+  createRequest(accessToken).post<{}>(`webhooks/${webhookId}`)

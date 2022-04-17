@@ -1,6 +1,6 @@
 import { Monzo, MonzoAPI } from '../types'
 import { AuthedEndpoint } from '../types/endpoints'
-import Fetcher from '../utils/fetcher'
+import createRequest from '../utils/create-request'
 
 /**
  * The first step when uploading an attachment is to obtain a temporary URL to
@@ -12,7 +12,7 @@ export const uploadAttachment: AuthedEndpoint<
   MonzoAPI.Attachments.UploadAttachmentParams,
   Monzo.Attachments.UploadedFile
 > = async (accessToken: string, { fileName, fileType, contentLength }) =>
-  new Fetcher(accessToken)
+  createRequest(accessToken)
     .withFormData({
       file_name: fileName,
       file_type: fileType,
@@ -29,7 +29,7 @@ export const registerAttachment: AuthedEndpoint<
   MonzoAPI.Attachments.RegisterAttachmentParams,
   Monzo.Attachments.Attachment
 > = async (accessToken: string, { externalId, fileUrl, fileType }) =>
-  new Fetcher(accessToken)
+  createRequest(accessToken)
     .withFormData({
       external_id: externalId,
       file_url: fileUrl,
@@ -47,6 +47,6 @@ export const deregisterAttachment: AuthedEndpoint<
   MonzoAPI.Attachments.DeregisterAttachmentParams,
   {}
 > = async (accessToken: string, { attachmentId }) =>
-  new Fetcher(accessToken)
+  createRequest(accessToken)
     .withFormData({ id: attachmentId })
     .post<{}>(`attachment/deregister`)

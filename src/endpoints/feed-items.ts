@@ -1,5 +1,5 @@
 import { Monzo, MonzoAPI } from '../types'
-import Fetcher from '../utils/fetcher'
+import createRequest from '../utils/create-request'
 import remapObject from '../utils/remap-object'
 
 /**
@@ -11,7 +11,7 @@ export const createFeedItem = async <T extends Monzo.FeedItems.Types = 'basic'>(
   accessToken: string,
   { accountId, type, url, params }: MonzoAPI.FeedItems.CreateFeedItemParams<T>
 ): Promise<{}> =>
-  new Fetcher(accessToken)
+  createRequest(accessToken)
     .withFormData({
       account_id: accountId,
       type: type,

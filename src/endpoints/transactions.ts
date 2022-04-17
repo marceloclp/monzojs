@@ -1,6 +1,6 @@
 import { Monzo, MonzoAPI } from '../types'
 import { AuthedEndpoint } from '../types/endpoints'
-import Fetcher from '../utils/fetcher'
+import createRequest from '../utils/create-request'
 import remapObject from '../utils/remap-object'
 
 /**
@@ -14,7 +14,7 @@ export const getTransaction = async <
   accessToken: string,
   { transactionId, expand }: MonzoAPI.Transactions.GetTransactionParams<E>
 ): Promise<Monzo.Transactions.ExpandedTransaction<E>> =>
-  new Fetcher(accessToken)
+  createRequest(accessToken)
     .withQuery({ 'expand[]': expand })
     .get<{ transaction: Monzo.Transactions.ExpandedTransaction<E> }>(
       `transactions/${transactionId}`
@@ -38,7 +38,7 @@ export const getTransactions = async <
     before,
   }: MonzoAPI.Transactions.GetTransactionsParams<E>
 ): Promise<Monzo.Transactions.ExpandedTransaction<E>[]> =>
-  new Fetcher(accessToken)
+  createRequest(accessToken)
     .withQuery({
       account_id: accountId,
       'expand[]': expand,
@@ -72,7 +72,7 @@ export const annotateTransaction: AuthedEndpoint<
   MonzoAPI.Transactions.AnnotateTransactionParams,
   Monzo.Transactions.Transaction
 > = async (accessToken, { transactionId, prefix = '', metadata }) =>
-  new Fetcher(accessToken)
+  createRequest(accessToken)
     .withFormData(remapObject(metadata, (k) => `metadata[${prefix}${k}]`))
     .patch<{ transaction: Monzo.Transactions.Transaction }>(
       `transactions/${transactionId}`

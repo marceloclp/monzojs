@@ -1,6 +1,6 @@
 import { Monzo, MonzoAPI } from '../types'
 import { AuthedEndpoint } from '../types/endpoints'
-import Fetcher from '../utils/fetcher'
+import createRequest from '../utils/create-request'
 
 /**
  * Returns balance information for a specific account.
@@ -11,4 +11,4 @@ export const getBalance: AuthedEndpoint<
   MonzoAPI.Balance.GetBalanceParams,
   Monzo.Balance
 > = async (accessToken, { accountId }) =>
-  new Fetcher(accessToken).withQuery({ account_id: accountId }).get(`balance`)
+  createRequest(accessToken).withQuery({ account_id: accountId }).get(`balance`)

@@ -2,7 +2,7 @@
 import qs, { StringifiableRecord } from 'query-string'
 import { MONZO_API_BASE_URL } from '../config/constants'
 
-export default class Fetcher {
+export class Fetcher {
   private headers = {
     Authorization: '',
     'Content-Type': 'application/json',
@@ -64,3 +64,6 @@ export default class Fetcher {
     return this.fetch('DELETE', path)
   }
 }
+
+const createRequest = (accessToken: string) => new Fetcher(accessToken)
+export default createRequest

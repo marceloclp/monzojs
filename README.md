@@ -1,6 +1,8 @@
 # MonzoJS
 
-Unofficial wrapper for the Monzo API written in TypeScript.
+> Unofficial wrapper for the Monzo API written in TypeScript.
+
+[![NPM](https://img.shields.io/npm/v/@marceloclp/monzojs.svg)](https://www.npmjs.com/package/@marceloclp/monzojs)
 
 MonzoJS **does not** handle authentication, and you must already have your access token in hands.
 

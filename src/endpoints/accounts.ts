@@ -1,5 +1,5 @@
 import { Monzo, MonzoAPI } from '../types'
-import Fetcher from '../utils/fetcher'
+import createRequest from '../utils/create-request'
 
 /**
  * Returns a list of accounts owned by the currently authorised user.
@@ -12,7 +12,7 @@ export const getAccounts = async <
   accessToken: string,
   { accountType }: MonzoAPI.Accounts.GetAccountsParams<T>
 ): Promise<Monzo.Accounts.GetAccount<T>[]> =>
-  new Fetcher(accessToken)
+  createRequest(accessToken)
     .withQuery({ account_type: accountType })
     .get<{ accounts: Monzo.Accounts.GetAccount<T>[] }>(`accounts`)
     .then(({ accounts }) => accounts)

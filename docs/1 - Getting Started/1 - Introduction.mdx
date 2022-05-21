@@ -1,0 +1,62 @@
+# Introduction
+
+This is an unofficial wrapper for the [Monzo API](https://docs.monzo.com/)
+written in TypeScript.
+
+As of now, MonzoJS **does not** handle authentication, and you must already have
+your access token in hands. More information can be found in the official Monzo
+documentation [here](https://docs.monzo.com/#authentication).
+
+## Installation
+
+With NPM:
+
+```bash
+npm i @marceloclp/monzojs
+```
+
+Or with yarn:
+
+```bash
+yarn add @marceloclp/monzojs
+```
+
+## Usage
+
+MonzoJS exports every endpoint individually, as well as a client for convenience
+when you need to make many requests.
+
+```ts
+import { getTransactions } from '@marceloclp/monzojs'
+
+async () => {
+  // Individual endpoints always follow the same signature, with the accepted
+  // parameters followed by the access token that you must already have in hands.
+  const transactions = await getTransactions('myAccessToken', { limit: 50 })
+}
+```
+
+Alternatively, you can instanciante `MonzoClient` to avoid passing down your
+access token every time.
+
+```ts
+import MonzoClient from '@marceloclp/monzojs'
+
+async () => {
+  // Access token is passed to client.
+  const monzo = MonzoClient('myAccessToken')
+  const transactions = await client.getTransactions({ limit: 50 })
+  const accounts = await client.getAccounts()
+}
+```
+
+## Typings
+
+For convenience, the package also exports a **namespace** containing all the
+typings returned by the Monzo API:
+
+```ts
+import { Monzo } from '@marceloclp/monzojs'
+
+type Account = Monzo.Accounts.RetailAccount
+```
